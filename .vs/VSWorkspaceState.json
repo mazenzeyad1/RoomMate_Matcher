@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\apps",
+    "\\apps\\server",
+    "\\apps\\server\\src",
+    "\\apps\\server\\src\\listing",
+    "\\apps\\server\\test"
+  ],
+  "SelectedNode": "\\apps\\server\\test\\app.e2e-spec.ts",
+  "PreviewInSolutionExplorer": false
+}
