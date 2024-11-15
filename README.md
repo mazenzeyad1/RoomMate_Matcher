@@ -1,18 +1,4 @@
-# Roomiez
 
-## Team
-
-Tarek Elalfi 40197527,
-
-Khaled Saleh 40210125,
-
-Mario El Shaer 40210124,
-
-Omar Shehata 40164194,
-
-Ramy Attalla 40205642,
-
-Moetaz Mohamed 40175488
 
 ## How to run
 - NOTE: Project requires Node V18+ to run
