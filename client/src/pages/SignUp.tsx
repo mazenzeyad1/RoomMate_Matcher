@@ -11,7 +11,6 @@ const SignUp = () => {
 	const [first_name, setFirstName] = useState('')
 	const [last_name, setLastName] = useState('')
 	const [user_name, setUserName] = useState('')
-	const [address, setAddress] = useState('')
 	const [phone_no, setPhoneNo] = useState('')
 
 	function createUserCookie() {
@@ -26,9 +25,7 @@ const SignUp = () => {
 			first_name: first_name,
 			last_name: last_name,
 			user_name: user_name,
-			address: address,
 			phone_no: phone_no,
-			is_admin: false
 		};
 
 		if (
@@ -37,7 +34,6 @@ const SignUp = () => {
 			task.first_name &&
 			task.last_name &&
 			task.user_name &&
-			task.address &&
 			task.phone_no
 		) {
 			//Create new account and then redirect to home page with the new user logged in
@@ -120,17 +116,6 @@ const SignUp = () => {
 						onChange={(e) => setPassword(e.target.value)}
 					/>
 					<label htmlFor='signup_password'>Password</label>
-				</div>
-				<div className='form-floating'>
-					<input
-						type='address'
-						className='form-control'
-						id='address'
-						value={address}
-						placeholder='Address'
-						onChange={(e) => setAddress(e.target.value)}
-					/>
-					<label htmlFor='address'>Address</label>
 				</div>
 				<div className='form-floating'>
 					<input

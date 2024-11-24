@@ -32,6 +32,10 @@ const Login = () => {
 						navigation('/')
 					}
 				}
+                else {
+                    // TODO: Update a UI element instead
+                    window.alert("We couldn't sign you in, please check your username and password and try again")
+                }
 			})
 			.catch((err) => {
 				console.log(err);

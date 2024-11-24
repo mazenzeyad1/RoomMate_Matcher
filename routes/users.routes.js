@@ -31,7 +31,6 @@ router.post('/users', (req, res, next) => {
 		req.body.email &&
 		req.body.first_name &&
 		req.body.last_name &&
-		req.body.address &&
 		req.body.phone_no
 	) {
 		Users.create({
@@ -40,7 +39,6 @@ router.post('/users', (req, res, next) => {
 			email: req.body.email,
 			first_name: req.body.first_name,
 			last_name: req.body.last_name,
-			address: req.body.address,
 			phone_no: req.body.phone_no,
 		})
 			.then((data) => { console.log('user is created')
