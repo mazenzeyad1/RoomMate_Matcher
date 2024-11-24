@@ -48,7 +48,7 @@ router.post('/users', (req, res, next) => {
 			next()});
 	} else {
 		res.json({
-			error: 'Name or price is empty',
+			error: 'Missing field information',
 		});
 	}
 });
