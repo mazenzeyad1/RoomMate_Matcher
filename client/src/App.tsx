@@ -3,6 +3,8 @@ import Home from "./pages/Home"
 import Navbar from "./components/navbar/Navbar"
 import SignUp from './pages/SignUp'
 import Login from './pages/Login'
+import MatchProfileCreator from "./pages/MatchProfileCreator";
+import MatchProfileSuccessPage from "./pages/MatchProfileSuccess";
 import "./App.css";
 
 function App() {
@@ -15,6 +17,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/match-profile-creator" element={<MatchProfileCreator />} />
+            <Route path="/profile-created" element={<MatchProfileSuccessPage />} />
           </ReactRoutes>
         </div>
       </BrowserRouter>

@@ -3,7 +3,7 @@ import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
-	const [cookies, setCookie, removeCookie] = useCookies();
+	const [cookies, _, removeCookie] = useCookies();
 	const navigation = useNavigate();
 	function logOut() {
 		removeCookie('user_name');
@@ -31,6 +31,9 @@ const Navbar = () => {
 					</React.Fragment>
 				) : (
 					<React.Fragment>
+						<li className='nav-item'>
+							<a className='nav-link' href='/match-profile-creator'>Create your profile</a>
+						</li>
 						<li className='nav-item'>
 							{/* TODO: Change this to a picture and a dropdown. Also, move it to the right side (for both) */}
 							<p>Logged in as: {cookies.user_name}</p>
