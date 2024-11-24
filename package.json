@@ -1,7 +1,7 @@
 {
     "name": "soen-357-project",
     "version": "1.0.0",
-    "description": "## Objective",
+    "description": "WebApp for roommate matching service",
     "main": "server.js",
     "scripts": {
         "start": "node server.js",
