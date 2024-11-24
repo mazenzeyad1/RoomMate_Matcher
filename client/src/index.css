@@ -157,3 +157,12 @@ a {
 	color: #5465ff;
 	text-decoration: none;
 }
+
+ul.linkert {
+  list-style-type: none;
+}
+
+li.linkert {
+  float: left;
+  padding: auto;
+}

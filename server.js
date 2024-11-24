@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/users.routes')
+const matchProfileRoutes = require('./routes/matchProfiles.routes')
 require('dotenv').config();
 
 const app = express();
@@ -29,6 +30,7 @@ app.use(express.urlencoded({ limit: '6mb', extended: true }))
 
 // Set the routes to use, these are the api endpoints for accessing mongodb
 app.use('/', userRoutes)
+app.use('/', matchProfileRoutes)
 
 app.use((err, req, res, next) => {
 	console.log(err);
