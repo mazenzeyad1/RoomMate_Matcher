@@ -1,0 +1,159 @@
+#add-new-product-form,
+#product_details,
+#home,
+#cart-row {
+	padding: 2% 5%;
+}
+
+.navbar {
+	padding: 1% 5%;
+}
+
+.search {
+	width: 300px;
+}
+
+.form-signin {
+	width: 100%;
+	max-width: 330px;
+	padding: 100px 15px;
+	margin: auto;
+	text-align: center;
+}
+
+.form-signin .checkbox {
+	font-weight: 400;
+}
+
+.form-signin .form-floating:focus-within {
+	z-index: 2;
+}
+
+.form-signin input[type='email'] {
+	margin-bottom: -1px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.form-signin input[type='password'] {
+	margin-bottom: 10px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+.form-signup {
+	width: 100%;
+	max-width: 330px;
+	padding: 100px 15px;
+	margin: auto;
+	text-align: center;
+}
+
+.form-signup .form-floating:focus-within {
+	z-index: 2;
+}
+
+.form-signup input[type='firstname'] {
+	margin-bottom: -1px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+.form-signup input[type='lastname'] {
+	margin-bottom: -1px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.form-signup input[type='signup_email'] {
+	margin-bottom: -1px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.form-signup input[type='signup_password'] {
+	margin-bottom: 10px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+.grid-container {
+	display: grid;
+	grid-template-areas: 'main';
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr;
+	height: 100%;
+}
+main {
+	grid-area: main;
+	padding: 1rem;
+	background-color: lightgray;
+}
+
+.row {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.card {
+	border: 0.1rem white solid;
+	background-color: white;
+	border-radius: 0.5rem;
+	margin: 0.2rem;
+}
+.card-body {
+	padding: 0.5rem;
+	margin-bottom: 0.2rem;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+a:hover {
+	color: orangered;
+}
+
+img {
+	border-radius: 0.5rem;
+	max-width: 29rem;
+	width: 100%;
+}
+.cart {
+	padding: 0 30%;
+}
+
+.right-align {
+	position: relative;
+	float: right;
+}
+
+.spinner {
+	text-align: center;
+}
+
+body {
+	background: #eee;
+}
+.card {
+	box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
+}
+.card {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	word-wrap: break-word;
+	background-color: #fff;
+	background-clip: border-box;
+	border: 0 solid rgba(0, 0, 0, 0.125);
+	border-radius: 1rem;
+}
+.text-reset {
+	--bs-text-opacity: 1;
+	color: inherit !important;
+}
+a {
+	color: #5465ff;
+	text-decoration: none;
+}

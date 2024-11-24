@@ -5,17 +5,16 @@
 
 1- Clone repository 
 
-2- In the terminal in the main root of the folder run: npm install
+2- Start a new terminal in the root folder of the project and run:
+```PowerShell
+npm run setup
+```
 
-3- In the terminal navigate to apps/client: cd apps/client and run npm install
+3- To start the server and react:
+```PowerShell
+npm run dev
+```
 
-4- In the terminal navigate to apps/server: cd apps/server and run npm install
+This script will run the server and the react app in the same terminal. To end the processes, press ctrl+C.
 
-5- In the terminal in the main root of the folder run: npm run dev
-
-
-
-
-
-
-
+- NOTE: If you make changes to server.js and save them, the server will re-launch with the new changes.
