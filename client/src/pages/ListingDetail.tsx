@@ -1,35 +1,41 @@
-import * as React from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import axios from 'axios'
 
 const ListingDetails = () => {
   const { id } = useParams(); // Extract the ID from the URL
+  //Typescript complains when we pass it an empty object because it doesn't know if the field exists
+  const [listing, setListing] = useState({
+    image: null,
+    title: "Not found",
+    price_per_month: 0,
+    tags: ["none"],
+    description: "empty",
+    contact_info: {
+      first_name: "John",
+      last_name: "Doe",
+      phone_number: "555-555-0123",
+      email: "test@example.com"
+    }
+  })
 
-  // Mock data (replace with a dynamic API call later)
-  const listings = [
-    {
-      id: "1",
-      image: "https://via.placeholder.com/300",
-      title: "1 house",
-      price: "$750",
-      tags: ["furnished", "utilities", "BackYard"],
-      description: "A beautiful house with a backyard, perfect for families.",
-    },
-    {
-      id: "2",
-      image: "https://via.placeholder.com/300",
-      title: "2 house",
-      price: "$1230",
-      tags: ["furnished", "utilities"],
-      description: "A modern house with all the amenities included.",
-    },
-  ];
+  async function getListing() {
+    const response = await axios.get(`/listings/${id}`)
 
-  // Find the specific listing by ID
-  const listing = listings.find((item) => item.id === id);
+    if(!response.data) {
+      //TODO: change this to update something on the screen
+      window.alert("Error while fetching the listing")
+      return
+    }
 
-  if (!listing) {
-    return <div className="text-center py-5">Listing not found!</div>;
+    setListing(response.data)
   }
+
+  useEffect(() => {
+    getListing()
+
+    return
+  }, [])
 
   return (
     <div className="container py-5">
@@ -43,7 +49,7 @@ const ListingDetails = () => {
         </div>
         <div className="col-md-6">
           <h1 className="display-5">{listing.title}</h1>
-          <p className="text-muted">{listing.price}</p>
+          <p className="text-muted">${listing.price_per_month} per month</p>
           <p>{listing.description}</p>
           <div className="d-flex flex-wrap gap-2 mt-3">
             {listing.tags.map((tag, index) => (
@@ -55,6 +61,19 @@ const ListingDetails = () => {
               </span>
             ))}
           </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-6">
+          <h1>Listed by:</h1>
+          <p>{listing.contact_info.first_name} {listing.contact_info.last_name}</p>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-6">
+          <h1>Contact information:</h1>
+          <p>Phone number: {listing.contact_info.phone_number}</p>
+          <p>Email: {listing.contact_info.email}</p>
         </div>
       </div>
     </div>

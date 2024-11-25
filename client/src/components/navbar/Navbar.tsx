@@ -32,6 +32,9 @@ const Navbar = () => {
 				) : (
 					<React.Fragment>
 						<li className='nav-item'>
+							<a className='nav-link' href='/create-listing'>Create a listing</a>
+						</li>
+						<li className='nav-item'>
 							<a className='nav-link' href='/match-profile-creator'>Create your profile</a>
 						</li>
 						<li className='nav-item'>
