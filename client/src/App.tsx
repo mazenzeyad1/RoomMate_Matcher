@@ -5,6 +5,9 @@ import SignUp from './pages/SignUp'
 import Login from './pages/Login'
 import MatchProfileCreator from "./pages/MatchProfileCreator";
 import MatchProfileSuccessPage from "./pages/MatchProfileSuccess";
+import ListingDetails from "./pages/ListingDetail";
+import CreateListingPage from "./pages/CreateListing";
+import ListingCreationSuccessPage from "./pages/ListingCreationSuccess";
 import "./App.css";
 
 function App() {
@@ -19,6 +22,9 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/match-profile-creator" element={<MatchProfileCreator />} />
             <Route path="/profile-created" element={<MatchProfileSuccessPage />} />
+            <Route path="/listings/:id" element={<ListingDetails />} />
+            <Route path="/create-listing" element={<CreateListingPage />} />
+            <Route path="/create-listing-success" element={<ListingCreationSuccessPage />} />
           </ReactRoutes>
         </div>
       </BrowserRouter>
