@@ -8,6 +8,7 @@ const MatchProfileSchema = new Schema({
     preferred_chores: String,
     socializing_level: Number,
     associated_user: String,
+    preferences: [String]
 });
 
 const MatchProfile = mongoose.model('matchprofiles', MatchProfileSchema);

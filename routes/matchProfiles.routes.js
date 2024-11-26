@@ -29,7 +29,8 @@ router.post('/match-profile', (req, res, next) => {
         req.body.schedule &&
         req.body.budget &&
         req.body.preferred_chores &&
-        req.body.socializing_level
+        req.body.socializing_level &&
+        req.body.preferences
     ) {
         MatchProfile.create({
             cleanliness_level: req.body.cleanliness_level,
@@ -37,7 +38,8 @@ router.post('/match-profile', (req, res, next) => {
             budget: req.body.budget,
             preferred_chores: req.body.preferred_chores,
             socializing_level: req.body.socializing_level,
-            associated_user: req.body.user_name
+            associated_user: req.body.user_name,
+            preferences: req.body.preferences,
         })
         .then((data) => {
             console.log("The profile was successfully created");

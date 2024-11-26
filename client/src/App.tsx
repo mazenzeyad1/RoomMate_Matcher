@@ -27,7 +27,6 @@ function App() {
           <Route path="/listings/:id" element={<ListingDetails />} />
           <Route path="/create-listing" element={<CreateListingPage />} />
           <Route path="/create-listing-success" element={<ListingCreationSuccessPage />} />
-          <Route path="/profile/:id" element={<Profile />} />
           <Route path="/profile" element={<Profile />} /> {/* General Profile Route */}
           <Route path="/edit-profile" element={<EditProfile />} />
           </ReactRoutes>

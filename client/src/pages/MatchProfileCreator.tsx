@@ -61,7 +61,7 @@ const MatchProfileCreator = () => {
                 budget: parseInt(formData.budget),
                 preferred_chores: formData.preferredChores,
                 socializing_level: formData.socializingLevel,
-                preferences: formData.preferences, // Include preferences in the payload
+                preferences: formData.preferences,
                 user_name: cookies.user_name,
             };
 

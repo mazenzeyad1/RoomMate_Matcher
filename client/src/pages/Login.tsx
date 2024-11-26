@@ -7,7 +7,7 @@ const Login = () => {
   const navigation = useNavigate();
   const [user_name, setUserName] = useState('');
   const [password, setPassword] = useState('');
-  const [cookies, setCookie] = useCookies(['user_name']);
+  const [cookies, setCookie] = useCookies(['user_name', 'user_avatar']);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
