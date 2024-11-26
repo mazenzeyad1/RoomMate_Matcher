@@ -4,6 +4,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 
 const SignUp = () => {
+  const oneMegabyteAsBits = 1048576;
+  const fiveMegabytesAsBits = oneMegabyteAsBits * 5;
   const navigation = useNavigate();
   const [cookies, setCookie] = useCookies();
   const [email, setEmail] = useState('');
@@ -14,9 +16,12 @@ const SignUp = () => {
   const [phone_no, setPhoneNo] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [avatar, setAvatar] = useState('');
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
 
   function createUserCookie() {
     setCookie("user_name", user_name, {path: '/', sameSite: 'lax'});
+    setCookie("user_avatar", avatar, {path: '/', sameSite: 'lax'})
   }
 
   async function createNewUser() {
@@ -30,6 +35,7 @@ const SignUp = () => {
       last_name,
       user_name,
       phone_no,
+      avatar
     };
 
     if (
@@ -38,7 +44,8 @@ const SignUp = () => {
       task.first_name &&
       task.last_name &&
       task.user_name &&
-      task.phone_no
+      task.phone_no &&
+      task.avatar
     ) {
       try {
         const res = await axios.post('/users', task);
@@ -55,6 +62,33 @@ const SignUp = () => {
     }
     setIsLoading(false);
   }
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.size > fiveMegabytesAsBits) {
+        setError("Image must be less than 5MB");
+        return;
+    }
+
+    try {
+        const base64 = await convertImageToBase64(file);
+        setAvatar(base64)
+        setPreviewImage(URL.createObjectURL(file));
+    } catch (err) {
+        setError("Failed to process image");
+    }
+  };
+
+  const convertImageToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = error => reject(error);
+    });
+  };
 
   useEffect(() => {
     if(cookies.user_name) {
@@ -183,6 +217,48 @@ const SignUp = () => {
                       </div>
                     </div>
                   </div>
+                  {/* Image Upload Section */}
+                  <div className="col-12 text-center mb-4">
+                        <div className="position-relative d-inline-block">
+                            {previewImage ? (
+                                <img
+                                    src={previewImage}
+                                    alt="Preview"
+                                    className="rounded-3 mb-3"
+                                    style={{ 
+                                        maxWidth: '100%', 
+                                        maxHeight: '300px', 
+                                        objectFit: 'cover' 
+                                    }}
+                                />
+                            ) : (
+                                <div 
+                                    className="rounded-3 bg-light d-flex align-items-center justify-content-center mb-3"
+                                    style={{ width: '100%', height: '300px' }}
+                                >
+                                    <div className="text-center text-muted">
+                                        <i className="bi bi-image display-4"></i>
+                                        <p className="mt-2">Upload an image for your avatar</p>
+                                    </div>
+                                </div>
+                            )}
+                            <input
+                                type="file"
+                                id="image"
+                                className="d-none"
+                                accept="image/*"
+                                onChange={handleImageUpload}
+                            />
+                            <label 
+                                htmlFor="image" 
+                                className="btn btn-dark position-absolute bottom-0 end-0 m-3"
+                            >
+                                <i className="bi bi-camera me-2"></i>
+                                Upload Image
+                            </label>
+                        </div>
+                        <small className="text-muted d-block">Maximum file size: 5MB</small>
+                    </div>
                   <button
                     className="btn btn-dark w-100 mt-4 mb-3"
                     type="submit"

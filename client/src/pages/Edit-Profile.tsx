@@ -1,33 +1,31 @@
-import * as React from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useCookies } from "react-cookie";
 
 interface IUser {
   _id: string;
   name: string;
   email: string;
-  bio?: string;
   avatar?: string;
-  age?: number;
   number?: string;
   preferences?: string[];
-  location?: string;
 }
 
 const EditProfile: React.FC = () => {
+  const [cookies, setCookie] = useCookies()
   const navigate = useNavigate();
-  const [formData, setFormData] = React.useState<IUser>({
+  const [formData, setFormData] = useState<IUser>({
     _id: "12345",
     name: "John Doe",
     email: "johndoe@example.com",
-    bio: "This is John's bio.",
     avatar: "https://via.placeholder.com/150",
-    age: 25,
     number: "123-456-7890",
     preferences: ["Reading", "Traveling"],
-    location: "Montreal, QC"
   });
-  const [saving, setSaving] = React.useState<boolean>(false);
-  const [error, setError] = React.useState<string | null>(null);
+  const [saving, setSaving] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+  const [password, setPassword] = useState<string | null>('')
 
   const availablePreferences = [
     "Reading",
@@ -66,7 +64,7 @@ const EditProfile: React.FC = () => {
     setError(null);
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await updateUserData();
       console.log("Updated Profile Data:", formData);
       setSaving(false);
       navigate("/profile");
@@ -75,6 +73,55 @@ const EditProfile: React.FC = () => {
       setSaving(false);
     }
   };
+
+  async function updateUserData() {
+    var nameSplit = formData.name.split(' ')
+    var first_name = nameSplit[0]
+    var last_name = nameSplit[1]
+
+    const task = {
+      id: formData._id,
+      first_name: first_name,
+      last_name: last_name,
+      user_name: cookies.user_name,
+      password: password,
+      email: formData.email,
+      phone_number: formData.number,
+      avatar: formData.avatar
+    };
+
+    const res = await axios.patch(`/users/${formData._id}`, task)
+    if(res.data) {
+      console.log("user patched successfully")
+    }
+  }
+
+  async function getUserInfo() {
+    try {
+        const response = await axios.get(`/users/${cookies.user_name}`);
+        if (response.data) {
+            setFormData({
+                email: response.data.email,
+                number: response.data.phone_no,
+                name: `${response.data.first_name} ${response.data.last_name}`,
+                _id: response.data._id,
+                avatar: response.data.avatar,
+                preferences: ["Reading", "Traveling"]
+            });
+
+            setPassword(response.data.password)
+
+        }
+      } catch (err) {}
+  }
+
+  useEffect(() => {
+    if (!cookies.user_name) {
+      navigate('/');
+      return;
+    }
+    getUserInfo();
+  }, [cookies.user_name])
 
   return (
     <div className="min-vh-100 bg-light py-5">
@@ -146,18 +193,6 @@ const EditProfile: React.FC = () => {
                     </div>
                     <div className="col-md-6">
                       <div className="form-group">
-                        <label className="form-label">Age</label>
-                        <input
-                          type="number"
-                          name="age"
-                          className="form-control"
-                          value={formData.age || ""}
-                          onChange={handleChange}
-                        />
-                      </div>
-                    </div>
-                    <div className="col-md-6">
-                      <div className="form-group">
                         <label className="form-label">Phone Number</label>
                         <input
                           type="text"
@@ -166,32 +201,6 @@ const EditProfile: React.FC = () => {
                           value={formData.number || ""}
                           onChange={handleChange}
                         />
-                      </div>
-                    </div>
-                    <div className="col-12">
-                      <div className="form-group">
-                        <label className="form-label">Location</label>
-                        <input
-                          type="text"
-                          name="location"
-                          className="form-control"
-                          value={formData.location || ""}
-                          onChange={handleChange}
-                          placeholder="City, Country"
-                        />
-                      </div>
-                    </div>
-                    <div className="col-12">
-                      <div className="form-group">
-                        <label className="form-label">Bio</label>
-                        <textarea
-                          name="bio"
-                          className="form-control"
-                          value={formData.bio}
-                          onChange={handleChange}
-                          rows={4}
-                          placeholder="Tell us about yourself..."
-                        ></textarea>
                       </div>
                     </div>
                     <div className="col-12">

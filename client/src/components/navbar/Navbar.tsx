@@ -1,17 +1,36 @@
-import * as React from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import axios from 'axios'
 import "./Navbar.css";
 
 const Navbar: React.FC = () => {
-  const [cookies, _, removeCookie] = useCookies(["user_name", "user_id"]);
+  const [cookies, _, removeCookie] = useCookies(["user_name"]);
+  const [avatar, setAvatar] = useState('')
   const navigate = useNavigate();
 
   const logOut = () => {
     removeCookie("user_name");
-    removeCookie("user_id");
     navigate("/");
   };
+
+  async function getAvatar() {
+    try {
+      const res = await axios.get(`/users/${cookies.user_name}`)
+
+      if(res.data) {
+        setAvatar(res.data.avatar)
+      }
+    } catch(err) {
+      console.log(err)
+    }
+  }
+
+  useEffect(() => {
+    if(cookies.user_name) {
+      getAvatar()
+    }
+  }, [cookies.user_name])
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark" style={{ background: '#1a2634' }}>
@@ -77,7 +96,7 @@ const Navbar: React.FC = () => {
               <>
                 <li className="nav-item">
                   <img
-                    src="https://via.placeholder.com/30"
+                    src={avatar}
                     alt="Profile"
                     className="rounded-circle shadow-sm"
                     style={{
@@ -87,7 +106,7 @@ const Navbar: React.FC = () => {
                       border: "2px solid #fff",
                     }}
                     onClick={() => {
-                      navigate(`/profile/${cookies.user_id}`);
+                      navigate(`/profile`);
                     }}
                   />
                 </li>

@@ -31,7 +31,8 @@ router.post('/users', (req, res, next) => {
 		req.body.email &&
 		req.body.first_name &&
 		req.body.last_name &&
-		req.body.phone_no
+		req.body.phone_no &&
+		req.body.avatar
 	) {
 		Users.create({
 			user_name: req.body.user_name,
@@ -40,6 +41,7 @@ router.post('/users', (req, res, next) => {
 			first_name: req.body.first_name,
 			last_name: req.body.last_name,
 			phone_no: req.body.phone_no,
+			avatar: req.body.avatar
 		})
 			.then((data) => { console.log('user is created')
 				res.json(data)								
@@ -52,6 +54,20 @@ router.post('/users', (req, res, next) => {
 		});
 	}
 });
+
+router.patch('/users/:id', (req, res, next) => {
+	Users.findOneAndReplace({ _id: req.body.id }, {
+		first_name: req.body.first_name,
+		last_name: req.body.last_name,
+		avatar: req.body.avatar,
+		phone_no: req.body.phone_number,
+		user_name: req.body.user_name,
+		password: req.body.password,
+		email: req.body.email
+	})
+		.then((data) => res.json(data))
+		.catch(next);
+})
 
 router.delete('/users/:id', (req, res, next) => {
 	Users.findOneAndDelete({ _id: req.params.id })

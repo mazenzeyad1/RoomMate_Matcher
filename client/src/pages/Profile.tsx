@@ -1,27 +1,42 @@
-import * as React from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import axios from "axios";
 
 const Profile: React.FC = () => {
-  const { id } = useParams<{ id?: string }>();
+  const [cookies, setCookies] = useCookies();
   const navigate = useNavigate();
+  const [user, setUser] = useState({
+    first_name: "John",
+    last_name: "Doe",
+    email: "test@example.com",
+    avatar: "https://via.placeholder.com/150",
+    phone_number: "(555) 555-0123"
+  })
+  
+  async function getUserInfo() {
+    try {
+        const response = await axios.get(`/users/${cookies.user_name}`);
+        if (response.data) {
+            console.log(response.data)
+            setUser({
+                email: response.data.email,
+                phone_number: response.data.phone_no,
+                first_name: response.data.first_name,
+                last_name: response.data.last_name,
+                avatar: response.data.avatar
+            });
+        }
+      } catch (err) {}
+  }
 
-  const user = id
-    ? {
-        name: "John Doe",
-        email: "johndoe@example.com",
-        bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        avatar: "https://via.placeholder.com/150",
-        location: "Montreal, QC",
-        joinDate: "January 2024"
-      }
-    : {
-        name: "Guest User",
-        email: "guest@example.com",
-        bio: "Welcome to the profile page. Log in to access more features.",
-        avatar: "https://via.placeholder.com/150",
-        location: "Unknown",
-        joinDate: "N/A"
-      };
+  useEffect(() => {
+    if (!cookies.user_name) {
+      navigate('/');
+      return;
+    }
+    getUserInfo();
+  }, [cookies.user_name])
 
   return (
     <div className="min-vh-100 bg-light py-5">
@@ -55,20 +70,14 @@ const Profile: React.FC = () => {
                       <i className="bi bi-pencil"></i>
                     </button>
                   </div>
-                  <h3 className="fw-bold mb-1">{user.name}</h3>
+                  <h3 className="fw-bold mb-1">{user.first_name} {user.last_name}</h3>
                   <p className="text-muted mb-3">
                     <i className="bi bi-envelope me-2"></i>{user.email}
                   </p>
                   <div className="d-flex justify-content-center gap-3 mb-4">
                     <span className="text-muted small">
-                      <i className="bi bi-geo-alt me-1"></i>{user.location}
+                      <i className="bi bi-phone me-1"></i>{user.phone_number}
                     </span>
-                    <span className="text-muted small">
-                      <i className="bi bi-calendar3 me-1"></i>Joined {user.joinDate}
-                    </span>
-                  </div>
-                  <div className="bg-light p-4 rounded-3 mb-4">
-                    <p className="mb-0">{user.bio}</p>
                   </div>
                   <button
                     className="btn btn-dark px-5"
