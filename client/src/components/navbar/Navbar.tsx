@@ -14,26 +14,26 @@ const Navbar: React.FC = () => {
   };
 
   return (
-<nav className="navbar navbar-expand-lg navbar-dark" style={{ background: '#1a2634' }}>
+    <nav className="navbar navbar-expand-lg navbar-dark" style={{ background: '#1a2634' }}>
       <div className="container py-2">
         {/* Logo */}
-<Link className="navbar-brand fs-4 fw-bold" to="/">
+        <Link className="navbar-brand fs-4 fw-bold" to="/">
           ShareSpace
         </Link>
 
         {/* Hamburger Menu Button */}
-        <button 
-          className="navbar-toggler border-0" 
-          type="button" 
-          data-bs-toggle="collapse" 
+        <button
+          className="navbar-toggler border-0"
+          type="button"
+          data-bs-toggle="collapse"
           data-bs-target="#navbarContent"
-          aria-controls="navbarContent" 
-          aria-expanded="false" 
+          aria-controls="navbarContent"
+          aria-expanded="false"
           aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        
+
         {/* Navbar Content */}
         <div className="collapse navbar-collapse" id="navbarContent">
           {/* Left Aligned Links */}
@@ -41,19 +41,13 @@ const Navbar: React.FC = () => {
             {cookies.user_name ? (
               <>
                 <li className="nav-item">
-                  <Link 
-                    className="nav-link px-3" 
-                    to="/create-listing"
-                  >
+                  <Link className="nav-link px-3" to="/create-listing">
                     <i className="bi bi-plus-lg me-2"></i>
                     Create Listing
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link 
-                    className="nav-link px-3" 
-                    to="/match-profile-creator"
-                  >
+                  <Link className="nav-link px-3" to="/match-profile-creator">
                     <i className="bi bi-people me-2"></i>
                     Match Profile
                   </Link>
@@ -62,19 +56,13 @@ const Navbar: React.FC = () => {
             ) : (
               <>
                 <li className="nav-item">
-                  <Link 
-                    className="nav-link px-3" 
-                    to="/signup"
-                  >
+                  <Link className="nav-link px-3" to="/signup">
                     <i className="bi bi-person-plus me-2"></i>
                     Sign up
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link 
-                    className="nav-link px-3" 
-                    to="/login"
-                  >
+                  <Link className="nav-link px-3" to="/login">
                     <i className="bi bi-box-arrow-in-right me-2"></i>
                     Login
                   </Link>
@@ -85,36 +73,34 @@ const Navbar: React.FC = () => {
 
           {/* Right Aligned Profile Section */}
           <ul className="navbar-nav ms-auto d-flex align-items-center">
-            <li className="nav-item">
-              <img
-                src="https://via.placeholder.com/30"
-                alt="Profile"
-                className="rounded-circle shadow-sm"
-                style={{ 
-                  width: "38px", 
-                  height: "38px", 
-                  cursor: 'pointer',
-                  border: '2px solid #fff'
-                }}
-                onClick={() => {
-                  if (cookies.user_name) {
-                    navigate(`/profile/${cookies.user_id}`);
-                  } else {
-                    navigate("/profile");
-                  }
-                }}
-              />
-            </li>
             {cookies.user_name && (
-              <li className="nav-item ms-3">
-                <button
-className="btn btn-outline-light rounded-pill px-4"
-                  onClick={logOut}
-                >
-                  <i className="bi bi-box-arrow-right me-2"></i>
-                  Logout
-                </button>
-              </li>
+              <>
+                <li className="nav-item">
+                  <img
+                    src="https://via.placeholder.com/30"
+                    alt="Profile"
+                    className="rounded-circle shadow-sm"
+                    style={{
+                      width: "38px",
+                      height: "38px",
+                      cursor: "pointer",
+                      border: "2px solid #fff",
+                    }}
+                    onClick={() => {
+                      navigate(`/profile/${cookies.user_id}`);
+                    }}
+                  />
+                </li>
+                <li className="nav-item ms-3">
+                  <button
+                    className="btn btn-outline-light rounded-pill px-4"
+                    onClick={logOut}
+                  >
+                    <i className="bi bi-box-arrow-right me-2"></i>
+                    Logout
+                  </button>
+                </li>
+              </>
             )}
           </ul>
         </div>
