@@ -1,7 +1,15 @@
 ## Team:
-Allan Wu - 40188455   Ahmed Beltagi - 40155105		
+Allan Wu - 40188455   
+
+Ahmed Beltagi - 40155105		
+  
+  
   Johnny Morcos - 40172039	
+  
+  
   Mazed Mahmoud - 40175486	
+ 
+  
   Zachariya Javeri - 40130266
   
 ## How to run
