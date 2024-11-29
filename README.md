@@ -6,7 +6,9 @@ Mazed Mahmoud - 40175486
 Zachariya Javeri - 40130266
 
 ## Demo Video
-Teaser trailer video: https://we.tl/t-AYpyUxxfMt
+
+https://github.com/user-attachments/assets/790d0364-31a9-467e-a8f9-52d6cc5b9443
+
 
 
 ## How to run
