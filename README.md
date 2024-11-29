@@ -1,3 +1,4 @@
+Teaser trailer video: https://we.tl/t-AYpyUxxfMt
 
 
 ## How to run
@@ -18,3 +19,4 @@ npm run dev
 This script will run the server and the react app in the same terminal. To end the processes, press ctrl+C.
 
 - NOTE: If you make changes to server.js and save them, the server will re-launch with the new changes.
+- 
