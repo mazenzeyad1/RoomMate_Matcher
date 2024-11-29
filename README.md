@@ -33,6 +33,7 @@ This script will run the server and the react app in the same terminal. To end t
 - 
 ## Demo Video
 Please see below a demo of the application, showing all the functionalities, UI capabilities, and applied UI & UX concepts.
+
 https://github.com/user-attachments/assets/790d0364-31a9-467e-a8f9-52d6cc5b9443
 
 
